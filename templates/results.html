@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="results-section">
+    <div class="results-header">
+        <h2>Scan Results</h2>
+        <a href="/" class="new-scan-btn">
+            <i class="fas fa-plus"></i> New Scan
+        </a>
+    </div>
+    
+    <div class="url-display">
+        <span class="scanned-url">{{ results.url }}</span>
+        <div class="status-badge {% if results.is_phishing %}danger{% else %}safe{% endif %}">
+            {% if results.is_phishing %}
+                <i class="fas fa-exclamation-triangle"></i> Phishing Detected
+            {% else %}
+                <i class="fas fa-check-circle"></i> Likely Safe
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="results-details">
+        <div class="detail-card">
+            <h3><i class="fas fa-shield-alt"></i> Security Summary</h3>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {% if results.is_phishing %}85{% else %}15{% endif %}%;"></div>
+            </div>
+            <p class="risk-level">Risk Level: {% if results.is_phishing %}High{% else %}Low{% endif %}</p>
+        </div>
+        
+        <div class="detail-card">
+            <h3><i class="fas fa-search"></i> Detailed Analysis</h3>
+            <ul class="analysis-list">
+                <li class="{% if results.details.url_analysis %}danger{% else %}safe{% endif %}">
+                    <i class="fas fa-{% if results.details.url_analysis %}times-circle{% else %}check-circle{% endif %}"></i>
+                    URL Structure Analysis
+                </li>
+                <li class="{% if results.details.blacklist %}danger{% else %}safe{% endif %}">
+                    <i class="fas fa-{% if results.details.blacklist %}times-circle{% else %}check-circle{% endif %}"></i>
+                    Blacklist Check
+                </li>
+                <li class="{% if results.details.ssl %}safe{% else %}warning{% endif %}">
+                    <i class="fas fa-{% if results.details.ssl %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                    SSL Certificate Verification
+                </li>
+                <li class="{% if results.details.domain_age %}safe{% else %}warning{% endif %}">
+                    <i class="fas fa-{% if results.details.domain_age %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                    Domain Age Check
+                </li>
+            </ul>
+        </div>
+        
+        <div class="detail-card">
+            <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+            {% if results.is_phishing %}
+                <div class="alert alert-danger">
+                    <strong>Warning!</strong> This website shows characteristics of a phishing attempt.
+                    <ul>
+                        <li>Do not enter any personal information</li>
+                        <li>Do not download any files</li>
+                        <li>Report this site to your IT department</li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="alert alert-safe">
+                    <strong>This site appears safe</strong>, but always be cautious:
+                    <ul>
+                        <li>Check for HTTPS in the address bar</li>
+                        <li>Verify the domain name is correct</li>
+                        <li>Look for trust seals from known providers</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="share-results">
+        <p>Share these results:</p>
+        <div class="social-share">
+            <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+            <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+            <button class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></button>
+        </div>
+    </div>
+</section>
+{% endblock %}

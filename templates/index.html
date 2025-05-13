@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Protect Yourself from Phishing Attacks</h2>
+        <p>Enter a URL to check if it's a potential phishing website</p>
+        
+        <form id="scanForm" action="/analyze" method="POST">
+            <div class="search-box">
+                <input type="url" name="url" placeholder="https://example.com" required>
+                <button type="submit" class="scan-btn">
+                    <i class="fas fa-shield-alt"></i> Scan Now
+                </button>
+            </div>
+        </form>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <h3>10,000+</h3>
+                <p>Websites Analyzed</p>
+            </div>
+            <div class="stat-item">
+                <h3>99.7%</h3>
+                <p>Accuracy Rate</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Real-time Protection</p>
+            </div>
+        </div>
+    </div>
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='images/i2.png') }}" alt="Phishing Protection">
+    </div>
+</section>
+
+<section id="features" class="features">
+    <h2>Advanced Detection Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-link"></i>
+            </div>
+            <h3>URL Analysis</h3>
+            <p>Detects suspicious patterns in URLs that mimic legitimate sites</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <h3>Blacklist Check</h3>
+            <p>Compares against known phishing databases</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3>SSL Inspection</h3>
+            <p>Verifies security certificates and encryption</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <h3>Domain History</h3>
+            <p>Checks domain age and registration details</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
